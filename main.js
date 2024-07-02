@@ -30,8 +30,14 @@ let player;
 let cursors;
 let stars;
 
+let score = 0;
+let scoreTxt = "";
+
 function collectStar(player, star) {
   star.disableBody(true, true);
+
+  score += 10;
+  scoreTxt.setText(`Score: ${score}`);
 }
 
 function preload() {
@@ -102,6 +108,12 @@ function create() {
   this.physics.add.collider(stars, platforms);
   // check player collision
   this.physics.add.overlap(player, stars, collectStar, null, this);
+
+  // SCORE TEXT
+  scoreTxt = this.add.text(16, 16, "Score: 0", {
+    fontSize: "32px",
+    fill: "#000",
+  });
 }
 
 function update() {
